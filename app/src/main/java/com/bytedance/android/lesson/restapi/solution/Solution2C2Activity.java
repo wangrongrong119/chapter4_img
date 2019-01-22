@@ -174,26 +174,20 @@ public class Solution2C2Activity extends AppCompatActivity {
 //        mFeeds.get(4);
 
 
-        NetworkUtils.getResponseWithRetrofitAsyncFeed(new Callback<FeedResponse>() {
-            @Override public void onResponse(Call<FeedResponse> call, Response<FeedResponse> response) {
-                //接收到返回值，开始进行处理。
-                FeedResponse feeds = response.body();
-                mFeeds = feeds.getFeeds();
-                mRv.getAdapter().notifyDataSetChanged();
-                resetRefreshBtn();
-            }
+//        NetworkUtils.getResponseWithRetrofitAsyncFeed(new Callback<FeedResponse>() {
+//            @Override public void onResponse(Call<FeedResponse> call, Response<FeedResponse> response) {
+//                //接收到返回值，开始进行处理。
+//                FeedResponse feeds = response.body();
+//                mFeeds = feeds.getFeeds();
+//                mRv.getAdapter().notifyDataSetChanged();
+//                resetRefreshBtn();
+//            }
+//
+//            @Override public void onFailure(Call<FeedResponse> call, Throwable t) {
+//                Toast.makeText(Solution2C2Activity.this.getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
 
-            @Override public void onFailure(Call<FeedResponse> call, Throwable t) {
-                Toast.makeText(Solution2C2Activity.this.getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-//        System.out.print( mFeeds.get(0).getStudent_id());
-//        System.out.print( mFeeds.get(0).getImage_url());
-//        mFeeds.get(0).getStudent_id();
-//        mFeeds.get(0).getImage_url();
-//        mFeeds.get(0).getImage_url();
-//        mFeeds.get(0).getVideo_url();
 
 
 
