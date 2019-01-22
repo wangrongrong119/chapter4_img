@@ -1,6 +1,12 @@
 package com.bytedance.android.lesson.restapi.solution.utils;
 
 
+import com.bytedance.android.lesson.restapi.solution.bean.Cat;
+import com.bytedance.android.lesson.restapi.solution.bean.FeedResponse;
+import com.bytedance.android.lesson.restapi.solution.bean.PostVideoResponse;
+import com.bytedance.android.lesson.restapi.solution.newtork.ICatService;
+import com.bytedance.android.lesson.restapi.solution.newtork.IMiniDouyinService;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,11 +16,63 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+import okhttp3.MultipartBody;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 /**
  * @author Xavier.S
  * @date 2019.01.15 13:27
  */
 public class NetworkUtils {
+
+
+
+
+    public static void getResponseWithRetrofitAsync(Callback<Cat[]> callback) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.thecatapi.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retrofit.create(ICatService.class).randomCat().
+                enqueue(callback);
+    }
+
+
+
+    public static void getResponseWithRetrofitAsyncPost(String param1, String param2, MultipartBody.Part file1, MultipartBody.Part file2,Callback<PostVideoResponse[]> callbackPost) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.108.10.39:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+//四个参数？传入？
+        retrofit.create(IMiniDouyinService.class).createVideo(param1,param2,file1,file2).enqueue(callbackPost);
+
+
+
+
+
+    }
+
+
+
+    public static void getResponseWithRetrofitAsyncFeed(Callback<FeedResponse> callbackFeed) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.108.10.39:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retrofit.create(IMiniDouyinService.class).randomFeedResponse().
+                enqueue(callbackFeed);
+    }
+
+
+
+
+
+
 
     public static String getResponseWithHttpURLConnection(String url) {
         String result = null;
