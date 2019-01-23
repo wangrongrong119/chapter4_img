@@ -174,19 +174,25 @@ public class Solution2C2Activity extends AppCompatActivity {
 //        mFeeds.get(4);
 
 
-//        NetworkUtils.getResponseWithRetrofitAsyncFeed(new Callback<FeedResponse>() {
-//            @Override public void onResponse(Call<FeedResponse> call, Response<FeedResponse> response) {
-//                //接收到返回值，开始进行处理。
-//                FeedResponse feeds = response.body();
-//                mFeeds = feeds.getFeeds();
-//                mRv.getAdapter().notifyDataSetChanged();
-//                resetRefreshBtn();
-//            }
-//
-//            @Override public void onFailure(Call<FeedResponse> call, Throwable t) {
-//                Toast.makeText(Solution2C2Activity.this.getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+        NetworkUtils.getResponseWithRetrofitAsyncFeed(new Callback<FeedResponse>() {
+
+
+            @Override
+            public void onResponse(retrofit2.Call<FeedResponse> call, Response<FeedResponse> response) {
+                FeedResponse feeds = response.body();
+                mFeeds = feeds.getFeeds();
+                mRv.getAdapter().notifyDataSetChanged();
+                resetRefreshBtn();
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<FeedResponse> call, Throwable t) {
+                Toast.makeText(Solution2C2Activity.this.getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+
+
+            }
+
+        });
 
 
 
